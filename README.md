@@ -24,10 +24,10 @@ $ node index.js
 **Install on Termux ✅**
 
 Silahkan install terlebih dahulu [Termux](https://f-droid.org/en/packages/com.termux)
-Karena di termux saat install otomatis ```node_modules``` melalui ```npm install``` terjadi error, jadi kita install nodejs versi lts
+ karena di termux saat install otomatis ```node_modules``` melalui ```npm install``` terjadi error, jadi kita install nodejs versi lts
 ```bash
 $ pkg install git nodejs-lts -y
-$ git clone https://github.com/Ssetiawan007/Wabot-OpenAI
+$ git clone https://github.com/Setiawan007/Wabot-OpenAI
 $ cd Wa-OpenAI
 ```
 **Run**
