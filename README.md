@@ -3,12 +3,12 @@
 ***WhatsApp OpenAI Create with NodeJS Using Library [Baileys](https://github.com/adiwajshing/Baileys)***
 ## Perhatian!!
 Terdapat 2 tipe yaitu menggunakan command dan tanpa menggunakan command (auto chat).
-- Jika ingin menggunakan command silahkan ganti kata ```true``` menjadi ```false``` di file [key.json](https://github.com/Setiwan007/WaBot-OpenAI/blob/586dbf2e7bb182b3a649d560e50ef44911fb4db8/key.json#L3)<br>Untuk commandnya menggunakan ```.ai```
-- Jika tidak ingin menggunakan command (auto chat) silahkan ganti kata ```false``` menjadi ```true``` di file [key.json](https://github.com/Setiwan007/WaBot-OpenAI/blob/586dbf2e7bb182b3a649d560e50ef44911fb4db8/key.json#L3)
+- Jika ingin menggunakan command silahkan ganti kata ```true``` menjadi ```false``` di file [key.json](https://github.com/Setiwan007/WaBot-OpenAI/blob/main/key.json#L3)<br>Untuk commandnya menggunakan ```.ai```
+- Jika tidak ingin menggunakan command (auto chat) silahkan ganti kata ```false``` menjadi ```true``` di file [key.json](https://github.com/Setiwan007/WaBot-OpenAI/blob/main/key.json#L3)
 
 ## Get & Change OpenAI ApiKey
 - Jika limit ApiKey OpenAI sudah habis silahkan buat apikey yang barunya [Disini](https://beta.openai.com/account/api-keys)
-- Ganti ApiKey OpenAI pada file [key.json](https://github.com/Setiawan007/WaBot-OpenAI/blob/586dbf2e7bb182b3a649d560e50ef44911fb4db8/key.json#L2)
+- Ganti ApiKey OpenAI pada file [key.json](https://github.com/Setiawan007/WaBot-OpenAI/blob/main/key.json#L2)
 
 ## Install
 **Install on RDP/Windows ✅**
@@ -24,10 +24,10 @@ $ node index.js
 **Install on Termux ✅**
 
 Silahkan install terlebih dahulu [Termux](https://f-droid.org/en/packages/com.termux)
-Karena di termux saat install otomatis ```node_modules``` melalui ```npm install``` terjadi error, jadi kita install nodejs versi lts
+ karena di termux saat install otomatis ```node_modules``` melalui ```npm install``` terjadi error, jadi kita install nodejs versi lts
 ```bash
 $ pkg install git nodejs-lts -y
-$ git clone https://github.com/Ssetiawan007/Wabot-OpenAI
+$ git clone https://github.com/Setiawan007/Wabot-OpenAI
 $ cd Wa-OpenAI
 ```
 **Run**
