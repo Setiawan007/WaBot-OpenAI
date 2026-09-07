@@ -14,6 +14,8 @@ const _ = require('lodash')
 const PhoneNumber = require('awesome-phonenumber')
 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+const RATE_LIMIT_MS = 2000
+const rateLimitMap = new Map()
 
 const color = (text, color) => {
     return !color ? chalk.green(text) : chalk.keyword(color)(text)
@@ -120,7 +122,7 @@ function smsg(conn, m, store) {
 
 async function startHisoka() {
     const { version, isLatest } = await fetchLatestBaileysVersion()
-	console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`)
+	console.log('using WA v' + version.join('.') + ', isLatest: ' + isLatest)
     console.log(color(figlet.textSync('WaBot-OpenAI', {
 		font: 'Standard',
 		horizontalLayout: 'default',
@@ -153,6 +155,10 @@ async function startHisoka() {
             if (mek.key && mek.key.remoteJid === 'status@broadcast') return
             if (!client.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
             if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
+            const senderId = mek.key.remoteJid
+            const now = Date.now()
+            if (rateLimitMap.has(senderId) && now - rateLimitMap.get(senderId) < RATE_LIMIT_MS) return
+            rateLimitMap.set(senderId, now)
             m = smsg(client, mek, store)
             require("./scodeku")(client, m, chatUpdate, store)
         } catch (err) {
@@ -238,10 +244,10 @@ async function startHisoka() {
             else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Delete Session file SCodeKu.json and Scan Again.`); process.exit(); }
             else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startHisoka(); }
             else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startHisoka(); }
-            else { console.log(`Unknown DisconnectReason: ${reason}|${connection}`); startHisoka(); }
+            else { console.log('Unknown DisconnectReason: ' + reason + '|' + connection); startHisoka(); }
         } else if(connection === 'open') {
             console.log('Bot connected to server')
-            client.sendMessage(owner+'@s.whatsapp.net', { text: `Bot started!\n\nJangan lupa support ya bang, untuk kemajuan Bot. :)\n${donet}` })
+            client.sendMessage(owner[0]+'@s.whatsapp.net', { text: 'Bot started!\n\nJangan lupa support ya bang, untuk kemajuan Bot. :)\n' + donet })
         }
         // console.log('Connected...', update)
     })
@@ -285,7 +291,7 @@ startHisoka()
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
 	fs.unwatchFile(file)
-	console.log(chalk.redBright(`Update ${__filename}`))
+	console.log(chalk.redBright('Update ' + __filename))
 	delete require.cache[file]
 	require(file)
 })
